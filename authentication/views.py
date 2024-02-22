@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
-from .forms import LoginForm
+from .forms import LoginForm, SignupForm
+from django.conf import settings
 
 # Create login views here.
 
@@ -31,4 +32,17 @@ def logout_user(request):
     return redirect('login')
 
 # create signup view 
+
+def signup_page(request):
+    
+    form = SignupForm()
+    context = {'form': form}
+    
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(settings.LOGIN_URL)
+        
+    return render(request, 'authentication/signup.html', context )
 
