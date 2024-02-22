@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %} {% block content %}
+<main class="max-w-5xl mx-auto">
+  <section>
+    {% if user.is_authenticated %}
+    <p>
+      You are logged in as {{ request.user }}. Click here to
+      <a href="{% url 'logout' %}" class="bg-black text-slate-100 p-4"
+        >log out</a
+      >
+    </p>
+    {% endif %}
+  </section>
+</main>
+{% endblock content %}
